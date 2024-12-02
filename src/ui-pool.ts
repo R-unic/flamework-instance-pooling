@@ -1,7 +1,8 @@
 import { Component } from "@flamework/components";
-import { $file, $nameof } from "rbxts-transform-debug";
+import { $nameof } from "rbxts-transform-debug";
 
 import { InstancePool, PoolableInstance } from "./instance-pool";
+import { Flamework } from "@flamework/core";
 
 @Component({ tag: $nameof<PoolableUI>() })
 export class PoolableUI extends PoolableInstance<GuiObject> {
@@ -20,7 +21,6 @@ export class PoolableUI extends PoolableInstance<GuiObject> {
 
 export class UIPool extends InstancePool<PoolableUI> {
   public constructor(prefab: GuiObject, parent?: Instance, fillAmount?: number) {
-    const tag = $nameof<PoolableUI>();
-    super(tag, $file.filePath, prefab, parent, fillAmount);
+    super(Flamework.id<PoolableUI>(), prefab, parent, fillAmount);
   }
 }

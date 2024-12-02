@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/flamework-instance-pooling",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "out/init.lua",
   "scripts": {
     "build": "rbxtsc",
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@rbxts/compiler-types": "^3.0.0-types.0",
+    "@rbxts/id": "^1.0.0",
     "@rbxts/types": "^1.0.813",
     "rbxts-transform-debug": "github:roblox-aurora/rbxts-transform-debug",
     "rbxts-transformer-flamework": "latest",

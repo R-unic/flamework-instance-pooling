@@ -1,5 +1,6 @@
+import { Flamework } from "@flamework/core";
 import { Component } from "@flamework/components";
-import { $file, $nameof } from "rbxts-transform-debug";
+import { $nameof } from "rbxts-transform-debug";
 
 import { InstancePool, PoolableInstance } from "./instance-pool";
 
@@ -19,8 +20,7 @@ export class PoolablePart extends PoolableInstance<BasePart> {
 
 export class PartPool extends InstancePool<PoolablePart> {
   public constructor(prefab: BasePart, parent?: Instance, fillAmount?: number) {
-    const tag = $nameof<PoolablePart>();
-    super(tag, $file.filePath, prefab, parent, fillAmount);
+    super(Flamework.id<PoolablePart>(), prefab, parent, fillAmount);
   }
 
   public override take(cframe?: CFrame): PoolablePart {
