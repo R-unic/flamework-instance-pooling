@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/flamework-instance-pooling",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "out/init.lua",
   "scripts": {
     "build": "rbxtsc",
@@ -44,6 +44,7 @@
   "dependencies": {
     "@flamework/components": "^1.2.3",
     "@flamework/core": "^1.2.3",
+    "@rbxts/flamework-instance-pooling": "^1.0.1",
     "@rbxts/string-utils": "^1.0.3"
   }
 }

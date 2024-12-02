@@ -1,7 +1,7 @@
 import { Component } from "@flamework/components";
 import { $file, $nameof } from "rbxts-transform-debug";
 
-import { InstancePool, PoolableInstance } from ".";
+import { InstancePool, PoolableInstance } from "./instance-pool";
 
 @Component({ tag: $nameof<PoolablePart>() })
 export class PoolablePart extends PoolableInstance<BasePart> {
