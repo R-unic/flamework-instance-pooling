@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/flamework-instance-pooling",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "out/init.lua",
   "scripts": {
     "build": "rbxtsc",
@@ -26,6 +26,8 @@
   "types": "out/index.d.ts",
   "files": [
     "out",
+    "out/part-pool.d.ts",
+    "out/ui-pool.d.ts",
     "!**/*.tsbuildinfo"
   ],
   "publishConfig": {
