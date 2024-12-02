@@ -49,7 +49,7 @@ export abstract class InstancePool<T extends PoolableInstance<Instance>> impleme
   }
 
   private createPoolableInstance(): T {
-    const [_, tag] = this.id.split("@");
+    const [_, __, tag] = this.id.split("@");
     const instance = this.prefab.Clone();
     instance.Parent = this.parent;
     instance.AddTag(tag);
