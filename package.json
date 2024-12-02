@@ -1,0 +1,47 @@
+{
+  "name": "@rbxts/flamework-instance-pooling",
+  "version": "1.0.0",
+  "main": "out/init.lua",
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "roblox",
+    "rbxts",
+    "flamework",
+    "instance",
+    "part",
+    "ui",
+    "pooling",
+    "cache"
+  ],
+  "repository": {
+    "url": "https://github.com/R-unic/flamework-instance-pooling"
+  },
+  "author": "runicly",
+  "license": "ISC",
+  "description": "Classes to pool Roblox instances, UIPool and PartPool included",
+  "types": "out/index.d.ts",
+  "files": [
+    "out",
+    "!**/*.tsbuildinfo"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@rbxts/compiler-types": "^3.0.0-types.0",
+    "@rbxts/types": "^1.0.813",
+    "rbxts-transform-debug": "github:roblox-aurora/rbxts-transform-debug",
+    "rbxts-transformer-flamework": "latest",
+    "roblox-ts": "^3.0.0",
+    "typescript": "~5.5.2"
+  },
+  "dependencies": {
+    "@flamework/components": "^1.2.3",
+    "@flamework/core": "^1.2.3",
+    "@rbxts/string-utils": "^1.0.3"
+  }
+}

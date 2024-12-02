@@ -1,0 +1,58 @@
+{
+	"version": 1,
+	"flameworkVersion": "1.2.3",
+	"identifiers": {
+		"@rbxts/flamework-instance-pooling:out/instance-pool@PoolableInstance": "@rbxts/flamework-instance-pooling:instance-pool@PoolableInstance",
+		"@rbxts/flamework-instance-pooling:out/instance-pool@InstancePool": "@rbxts/flamework-instance-pooling:instance-pool@InstancePool",
+		"@rbxts/flamework-instance-pooling:out/part-pool@PoolablePart": "@rbxts/flamework-instance-pooling:part-pool@PoolablePart",
+		"@rbxts/flamework-instance-pooling:out/part-pool@PartPool": "@rbxts/flamework-instance-pooling:part-pool@PartPool",
+		"@rbxts/flamework-instance-pooling:out/ui-pool@PoolableUI": "@rbxts/flamework-instance-pooling:ui-pool@PoolableUI",
+		"@rbxts/flamework-instance-pooling:out/ui-pool@UIPool": "@rbxts/flamework-instance-pooling:ui-pool@UIPool",
+		"@rbxts/flamework-instance-pooling:out/init@PoolableInstance": "@rbxts/flamework-instance-pooling:init@PoolableInstance",
+		"@rbxts/flamework-instance-pooling:out/init@InstancePool": "@rbxts/flamework-instance-pooling:init@InstancePool"
+	},
+	"metadata": {},
+	"identifierPrefix": "@rbxts/flamework-instance-pooling",
+	"classes": [
+		{
+			"filePath": "out\\instance-pool.lua",
+			"internalId": "@rbxts/flamework-instance-pooling:instance-pool@PoolableInstance",
+			"decorators": [
+				{
+					"internalId": "$c:components@Component",
+					"name": "Component"
+				}
+			]
+		},
+		{
+			"filePath": "out\\part-pool.lua",
+			"internalId": "@rbxts/flamework-instance-pooling:part-pool@PoolablePart",
+			"decorators": [
+				{
+					"internalId": "$c:components@Component",
+					"name": "Component"
+				}
+			]
+		},
+		{
+			"filePath": "out\\ui-pool.lua",
+			"internalId": "@rbxts/flamework-instance-pooling:ui-pool@PoolableUI",
+			"decorators": [
+				{
+					"internalId": "$c:components@Component",
+					"name": "Component"
+				}
+			]
+		},
+		{
+			"filePath": "out\\init.lua",
+			"internalId": "@rbxts/flamework-instance-pooling:init@PoolableInstance",
+			"decorators": [
+				{
+					"internalId": "$c:components@Component",
+					"name": "Component"
+				}
+			]
+		}
+	]
+}
