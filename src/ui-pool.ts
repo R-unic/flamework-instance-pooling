@@ -23,4 +23,12 @@ export class UIPool<I extends GuiObject = GuiObject> extends InstancePool<Poolab
   public constructor(prefab: I, parent?: Instance, fillAmount?: number) {
     super(Flamework.id<PoolableUI>(), prefab, parent, fillAmount);
   }
+
+  public override take(position?: UDim2): PoolableUI<I> {
+    const ui = super.take();
+    if (position !== undefined)
+      ui.instance.Position = position;
+
+    return ui;
+  }
 }
