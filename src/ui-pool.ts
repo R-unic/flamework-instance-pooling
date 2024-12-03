@@ -1,14 +1,14 @@
+import { Flamework } from "@flamework/core";
 import { Component } from "@flamework/components";
 import { $nameof } from "rbxts-transform-debug";
 
 import { InstancePool, PoolableInstance } from "./instance-pool";
-import { Flamework } from "@flamework/core";
 
 @Component({ tag: $nameof<PoolableUI>() })
-export class PoolableUI extends PoolableInstance<GuiObject> {
-  private returnFunction?: (poolable: PoolableUI) => void;
+export class PoolableUI<I extends GuiObject = GuiObject> extends PoolableInstance<I> {
+  private returnFunction?: (poolable: PoolableUI<I>) => void;
 
-  public initialize(returnFunction: (poolable: PoolableUI) => void): void {
+  public initialize(returnFunction: (poolable: PoolableUI<I>) => void): void {
     this.returnFunction = returnFunction;
     this.instance.Visible = true;
   }
@@ -19,8 +19,8 @@ export class PoolableUI extends PoolableInstance<GuiObject> {
   }
 }
 
-export class UIPool extends InstancePool<PoolableUI> {
-  public constructor(prefab: GuiObject, parent?: Instance, fillAmount?: number) {
+export class UIPool<I extends GuiObject = GuiObject> extends InstancePool<PoolableUI<I>> {
+  public constructor(prefab: I, parent?: Instance, fillAmount?: number) {
     super(Flamework.id<PoolableUI>(), prefab, parent, fillAmount);
   }
 }
