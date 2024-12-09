@@ -18,7 +18,7 @@
     "cache"
   ],
   "repository": {
-    "url": "https://github.com/R-unic/flamework-instance-pooling"
+    "url": "git+https://github.com/R-unic/flamework-instance-pooling.git"
   },
   "author": "runicly",
   "license": "ISC",
