@@ -6,15 +6,13 @@ import { InstancePool, PoolableInstance } from "./instance-pool";
 
 @Component({ tag: $nameof<PoolableUI>() })
 export class PoolableUI<I extends GuiObject = GuiObject> extends PoolableInstance<I> {
-  private returnFunction?: (poolable: PoolableUI<I>) => void;
-
-  public initialize(returnFunction: (poolable: PoolableUI<I>) => void): void {
-    this.returnFunction = returnFunction;
+  public initialize(returnFunction: () => void): void {
+    super.initialize(returnFunction);
     this.instance.Visible = true;
   }
 
   public returnToPool(): void {
-    this.returnFunction?.(this);
+    super.returnToPool();
     this.instance.Visible = false;
   }
 }

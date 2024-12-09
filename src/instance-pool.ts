@@ -8,8 +8,15 @@ interface BaseInstancePool<T extends PoolableInstance<Instance>> {
 
 @Component()
 export abstract class PoolableInstance<T extends Instance> extends BaseComponent<{}, T> {
-  public abstract initialize(returnFunction: (poolable: PoolableInstance<T>) => void): void;
-  public abstract returnToPool(): void;
+  private returnFunction?: () => void;
+
+  public initialize(returnFunction: () => void): void {
+    this.returnFunction = returnFunction;
+  }
+
+  public returnToPool(): void {
+    this.returnFunction?.();
+  }
 }
 
 export abstract class InstancePool<T extends PoolableInstance<Instance>> implements BaseInstancePool<T>, BaseID<string> {
@@ -21,23 +28,31 @@ export abstract class InstancePool<T extends PoolableInstance<Instance>> impleme
     private readonly prefab: T["instance"],
     private readonly parent?: Instance,
     fillAmount = 0,
-    private readonly whenNoInstances: () => T = () => this.createPoolableInstance()
+    private readonly whenNoInstances: (pool: InstancePool<T>) => T = () => this.createPoolableInstance()
   ) {
     this.spawn(fillAmount);
   }
 
   public take(): T {
     if (this.getPooledCount() === 0)
-      this.whenNoInstances();
+      this.whenNoInstances(this);
 
     const poolable = this.pooledInstances.pop()!;
-    poolable.initialize(instance => this.return(<T>instance));
+    poolable.initialize(() => this.return(poolable));
 
     return poolable;
   }
 
   public getPooledCount(): number {
     return this.pooledInstances.size();
+  }
+
+  public getAllPoolables(): T[] {
+    return this.components.getAllComponents(this.id);
+  }
+
+  public getActivePoolables(): T[] {
+    return this.getAllPoolables().filter(poolable => !this.pooledInstances.includes(poolable));
   }
 
   protected spawn(amount: number): void {
