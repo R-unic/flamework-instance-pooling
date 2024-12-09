@@ -16,14 +16,24 @@ export interface InstancePoolOptions<T extends PoolableInstance<Instance>> {
 
 @Component()
 export abstract class PoolableInstance<T extends Instance> extends BaseComponent<{}, T> {
+  private lastInitialization = -1;
   private returnFunction?: () => void;
 
   public initialize(returnFunction: () => void): void {
+    this.lastInitialization = os.clock();
     this.returnFunction = returnFunction;
   }
 
   public returnToPool(): void {
+    this.lastInitialization = -1;
     this.returnFunction?.();
+  }
+
+  public getLifetime(): number {
+    if (this.lastInitialization === -1)
+      return 0;
+
+    return os.clock() - this.lastInitialization;
   }
 }
 
