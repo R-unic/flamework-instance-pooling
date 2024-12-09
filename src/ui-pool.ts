@@ -20,8 +20,8 @@ export class PoolableUI<I extends GuiObject = GuiObject> extends PoolableInstanc
 }
 
 export class UIPool<I extends GuiObject = GuiObject> extends InstancePool<PoolableUI<I>> {
-  public constructor(prefab: I, parent?: Instance, fillAmount?: number) {
-    super(Flamework.id<PoolableUI>(), prefab, parent, fillAmount);
+  public constructor(prefab: I, parent?: Instance, fillAmount?: number, whenNoInstances?: () => PoolableUI<I>) {
+    super(Flamework.id<PoolableUI>(), prefab, parent, fillAmount, whenNoInstances);
   }
 
   public override take(position?: UDim2): PoolableUI<I> {

@@ -20,18 +20,19 @@ export abstract class InstancePool<T extends PoolableInstance<Instance>> impleme
     public readonly id: string,
     private readonly prefab: T["instance"],
     private readonly parent?: Instance,
-    fillAmount = 0
+    fillAmount = 0,
+    private readonly whenNoInstances: () => T = () => this.createPoolableInstance()
   ) {
     this.spawn(fillAmount);
   }
 
   public take(): T {
-    const createInstance = this.getPooledCount() === 0;
-    let poolable = createInstance ?
-      this.createPoolableInstance()
-      : this.pooledInstances.pop()!;
+    if (this.getPooledCount() === 0)
+      this.whenNoInstances();
 
+    const poolable = this.pooledInstances.pop()!;
     poolable.initialize(instance => this.return(<T>instance));
+
     return poolable;
   }
 

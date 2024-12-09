@@ -19,8 +19,8 @@ export class PoolablePart<I extends BasePart = BasePart> extends PoolableInstanc
 }
 
 export class PartPool<I extends Part = Part> extends InstancePool<PoolablePart<I>> {
-  public constructor(prefab: I, parent?: Instance, fillAmount?: number) {
-    super(Flamework.id<PoolablePart>(), prefab, parent, fillAmount);
+  public constructor(prefab: I, parent?: Instance, fillAmount?: number, whenNoInstances?: () => PoolablePart<I>) {
+    super(Flamework.id<PoolablePart>(), prefab, parent, fillAmount, whenNoInstances);
   }
 
   public override take(cframe?: CFrame): PoolablePart<I> {
