@@ -2,7 +2,7 @@ import { Flamework } from "@flamework/core";
 import { Component } from "@flamework/components";
 import { $nameof } from "rbxts-transform-debug";
 
-import { InstancePool, PoolableInstance } from "./instance-pool";
+import { InstancePool, PoolableInstance, type InstancePoolOptions } from "./instance-pool";
 
 @Component({ tag: $nameof<PoolableUI>() })
 export class PoolableUI<I extends GuiObject = GuiObject> extends PoolableInstance<I> {
@@ -18,8 +18,8 @@ export class PoolableUI<I extends GuiObject = GuiObject> extends PoolableInstanc
 }
 
 export class UIPool<I extends GuiObject = GuiObject> extends InstancePool<PoolableUI<I>> {
-  public constructor(prefab: I, parent?: Instance, fillAmount?: number, whenNoInstances?: () => PoolableUI<I>) {
-    super(Flamework.id<PoolableUI>(), prefab, parent, fillAmount, whenNoInstances);
+  public constructor(options: InstancePoolOptions<PoolableUI<I>>) {
+    super(Flamework.id<PoolableUI>(), options);
   }
 
   public override take(position?: UDim2): PoolableUI<I> {

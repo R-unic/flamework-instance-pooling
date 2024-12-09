@@ -6,6 +6,14 @@ interface BaseInstancePool<T extends PoolableInstance<Instance>> {
   take(): T;
 }
 
+export interface InstancePoolOptions<T extends PoolableInstance<Instance>> {
+  readonly prefab: T["instance"],
+  readonly parent?: Instance,
+  readonly fillAmount?: number;
+
+  whenNoInstances(pool: InstancePool<T>): T;
+}
+
 @Component()
 export abstract class PoolableInstance<T extends Instance> extends BaseComponent<{}, T> {
   private returnFunction?: () => void;
@@ -25,17 +33,14 @@ export abstract class InstancePool<T extends PoolableInstance<Instance>> impleme
 
   public constructor(
     public readonly id: string,
-    private readonly prefab: T["instance"],
-    private readonly parent?: Instance,
-    fillAmount = 0,
-    private readonly whenNoInstances: (pool: InstancePool<T>) => T = () => this.createPoolableInstance()
+    private readonly options: InstancePoolOptions<T>
   ) {
-    this.spawn(fillAmount);
+    this.spawn(options.fillAmount ?? 0);
   }
 
   public take(): T {
     if (this.getPooledCount() === 0)
-      this.whenNoInstances(this);
+      this.options.whenNoInstances(this);
 
     const poolable = this.pooledInstances.pop()!;
     poolable.initialize(() => this.return(poolable));
@@ -66,8 +71,8 @@ export abstract class InstancePool<T extends PoolableInstance<Instance>> impleme
 
   private createPoolableInstance(): T {
     const [_, __, tag] = this.id.split("@");
-    const instance = this.prefab.Clone();
-    instance.Parent = this.parent;
+    const instance = this.options.prefab.Clone();
+    instance.Parent = this.options.parent;
     instance.AddTag(tag);
 
     const poolable: T = this.components.getComponent(instance, this.id)!;

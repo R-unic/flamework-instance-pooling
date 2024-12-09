@@ -2,7 +2,7 @@ import { Flamework } from "@flamework/core";
 import { Component } from "@flamework/components";
 import { $nameof } from "rbxts-transform-debug";
 
-import { InstancePool, PoolableInstance } from "./instance-pool";
+import { InstancePool, PoolableInstance, type InstancePoolOptions } from "./instance-pool";
 
 @Component({ tag: $nameof<PoolablePart>() })
 export class PoolablePart<I extends BasePart = BasePart> extends PoolableInstance<I> {
@@ -13,8 +13,8 @@ export class PoolablePart<I extends BasePart = BasePart> extends PoolableInstanc
 }
 
 export class PartPool<I extends Part = Part> extends InstancePool<PoolablePart<I>> {
-  public constructor(prefab: I, parent?: Instance, fillAmount?: number, whenNoInstances?: (pool: PartPool<I>) => PoolablePart<I>) {
-    super(Flamework.id<PoolablePart>(), prefab, parent, fillAmount, whenNoInstances);
+  public constructor(options: InstancePoolOptions<PoolablePart<I>>) {
+    super(Flamework.id<PoolablePart>(), options);
   }
 
   public override take(cframe?: CFrame): PoolablePart<I> {
