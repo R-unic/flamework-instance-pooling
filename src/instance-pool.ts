@@ -11,7 +11,7 @@ export interface InstancePoolOptions<T extends PoolableInstance<Instance>> {
   readonly parent?: Instance,
   readonly fillAmount?: number;
 
-  whenNoInstances(pool: InstancePool<T>): T;
+  whenNoInstances?(pool: InstancePool<T>): T;
 }
 
 @Component()
@@ -39,8 +39,10 @@ export abstract class InstancePool<T extends PoolableInstance<Instance>> impleme
   }
 
   public take(): T {
-    if (this.getPooledCount() === 0)
-      this.options.whenNoInstances(this);
+    if (this.getPooledCount() === 0) {
+      const whenNoInstances = this.options.whenNoInstances ?? (pool => pool.createPoolableInstance());
+      whenNoInstances(this);
+    }
 
     const poolable = this.pooledInstances.pop()!;
     poolable.initialize(() => this.return(poolable));
