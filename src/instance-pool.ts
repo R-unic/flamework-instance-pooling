@@ -50,7 +50,7 @@ export abstract class InstancePool<T extends PoolableInstance<Instance>> impleme
   public take(): T {
     if (this.getPooledCount() === 0) {
       const whenNoInstances = this.options.whenNoInstances ?? (pool => pool.createPoolableInstance());
-      whenNoInstances(this);
+      return whenNoInstances(this);
     }
 
     const poolable = this.pooledInstances.pop()!;
