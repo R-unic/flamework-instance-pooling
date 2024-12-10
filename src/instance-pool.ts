@@ -10,8 +10,7 @@ export interface InstancePoolOptions<T extends PoolableInstance<Instance>> {
   readonly prefab: T["instance"],
   readonly parent?: Instance,
   readonly fillAmount?: number;
-
-  whenNoInstances?(pool: InstancePool<T>): T;
+  readonly whenNoInstances?: (pool: InstancePool<T>) => T;
 }
 
 @Component()
